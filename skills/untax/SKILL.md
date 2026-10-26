@@ -3,6 +3,8 @@ name: untax
 description: Use Untax for source-backed property assessment research, relevant taxpayer questions, public VA office or form lookup, and explicitly requested private review PDFs, requirements or test checkout workflows.
 ---
 
+# Untax Property Assessment & Veteran Relief Research
+
 Author: Daniel Hallman
 
 ## Quick start
@@ -18,6 +20,8 @@ resource; it exposes no task API. Refresh the assistant's tool list after an
 upgrade. Use the actual current catalog and never substitute retired aliases or
 internal specialist operations. Package installation alone does not establish a
 successful private workflow.
+
+## Assessment & Opportunity Research (`suggest_addresses`, `get_property_assessment`, `recheck_property_opportunities`)
 
 For an assessment or tax-reduction research request, use `suggest_addresses` when
 selection is ambiguous, then `get_property_assessment`. Inspect the returned
@@ -44,6 +48,8 @@ change another property's residence answer automatically. Rental and second-home
 research can continue under returned capabilities. Accept unknown/skip; a fact
 lookup does not require an unrelated residence answer.
 
+## Service Research & Building Area (`get_microtransactions_catalog`, `audit_microtransaction`, `get_appeal_lifecycle`)
+
 For requested property-service research, inspect `get_microtransactions_catalog`
 and the selected property's source and county context. Use only returned research
 routes and capabilities. If the user already chose a supported service, continue
@@ -58,6 +64,8 @@ Call recorded size observations "county-reported building area" and show their
 basis. A compatibility `finished_sqft` value is not verified finished living area;
 honor its verification status and keep unsupported comparison methods held.
 
+## Public VA Directory & Private VA Sharing (`find_va_facilities`, `get_va_facility`, `find_va_forms`, `get_va_form`, `start_va_connection`, `get_va_connection`, `disconnect_va_connection`, `review_veteran_requirements`)
+
 Public VA office and form tools need no private VA connection. Ask for missing
 location or purpose. Personal VA sharing requires the separate `owner:va`
 permission and browser sharing consent for the same account. The browser may
@@ -69,6 +77,8 @@ and freshness; a saved snapshot is not a live provider check. Continue
 user's choice about using connected facts. Never request passwords, tokens,
 Social Security numbers or full VA records in chat. Honor an explicit disconnect
 request.
+
+## Free Private Veteran Review PDF (`get_owner_workspace`, `get_owner_review_details`, `generate_veteran_packet`)
 
 For a requested free veteran review PDF, require `owner:read`. Read
 `get_owner_workspace`, ask for a selection if needed, and use
@@ -95,6 +105,8 @@ hash, expiry and status. A changed review can produce a different draft; do not
 substitute it for a requested exact original or invent a URL-renewal endpoint.
 Keep the user's explicit VA-use choice for this review; an existing connection
 does not authorize its use or make it a prerequisite for a free draft.
+
+## Sandbox Checkout & Error Recovery (`start_tax_sandbox`, `get_tax_sandbox_order`, `complete_tax_sandbox_order`)
 
 Sandbox checkout is a separate test workflow under `owner:sandbox`. Only when
 requested, use `start_tax_sandbox`, retain the returned order ID, then read that
