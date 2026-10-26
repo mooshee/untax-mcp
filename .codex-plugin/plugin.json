@@ -1,0 +1,59 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "daniel@mooshworks.com",
+    "name": "Daniel Hallman",
+    "url": "https://untax.io"
+  },
+  "description": "Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions. Free private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing.",
+  "extensions": {
+    "com.openai": {
+      "categories": [
+        "Productivity",
+        "Business"
+      ],
+      "displayName": "Untax",
+      "privacyPolicy": "https://untax.io/privacy",
+      "termsOfService": "https://untax.io/terms"
+    }
+  },
+  "homepage": "https://untax.io",
+  "interface": {
+    "brandColor": "#4F46E5",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": [
+      "Research the assessment for a Hamilton County, TN property and show its source and evidence gaps.",
+      "Show the retained building observations and comparison evidence gaps for a Hamilton County property.",
+      "Show which property-tax research tools are available in this session and which benefit routes remain held."
+    ],
+    "developerName": "Daniel Hallman",
+    "displayName": "Untax",
+    "logo": "./assets/icon.svg",
+    "longDescription": "Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions. Free private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing.",
+    "privacyPolicyURL": "https://untax.io/privacy",
+    "shortDescription": "Source-backed property assessment research and draft assessment comparisons for support...",
+    "termsOfServiceURL": "https://untax.io/terms",
+    "websiteURL": "https://untax.io"
+  },
+  "keywords": [
+    "property-tax",
+    "tax-assessment",
+    "tax-appeal",
+    "real-estate",
+    "veteran-relief",
+    "tennessee",
+    "georgia"
+  ],
+  "license": "MIT",
+  "mcpServers": "./.mcp.json",
+  "name": "untax",
+  "repository": "https://github.com/mooshee/untax-mcp",
+  "skills": "./skills/",
+  "version": "0.4.2"
+}
