@@ -1,15 +1,18 @@
-# Untax MCP & Agent Plugin (`v0.4.2`)
+# Untax MCP & Agent Plugin (`v0.4.4`)
 
 [![Untax MCP server quality and maintenance on Glama](https://glama.ai/mcp/servers/mooshee/untax-mcp/badges/score.svg)](https://glama.ai/mcp/servers/mooshee/untax-mcp)
 
-Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions. Free private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct.
+Research county property assessments, compare available records, and prepare a free private veteran review PDF from a saved review you select. Missing facts stay visible. A draft does not establish eligibility or authorize filing.
 
 ## Quick start
 
-1. Open [Untax](https://untax.io) in your browser or connect your MCP client to `https://untax.io/mcp` (or `https://untax.io/api/v1/mcp`).
-2. Public property-assessment and VA office/form lookups are free and require no account or API key.
+1. Follow the [Untax setup guide](https://untax.io/integrations/0.4.1) to connect a supported assistant to `https://untax.io/mcp`.
+2. Ask about a property's available assessment records, a public VA office, or an official VA form. These public lookups require no account or API key. Check the response for sources and missing information.
+3. If you request a private review or test checkout, follow the browser sign-in link and review the requested permissions.
 
-## Install Across Agent Harnesses
+Version 0.4.4 updates package descriptions and instructions. Existing connections and account permissions are unchanged. Read the [release notes](https://github.com/mooshee/untax-mcp/releases/tag/v0.4.4) or [release history](https://github.com/mooshee/untax-mcp/releases).
+
+## Connect your assistant
 
 ### Claude Code / Claude Desktop
 ```bash
@@ -22,7 +25,11 @@ claude mcp add --transport http untax https://untax.io/mcp
 - [1-Click Install in VS Code](https://insiders.vscode.dev/redirect/mcp/install?name=untax&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Funtax.io%2Fmcp%22%7D)
 
 ### OpenAI Codex CLI / Desktop
-Add `.codex-plugin/plugin.json` or `.mcp.json` pointing to `https://untax.io/mcp`.
+```bash
+codex mcp add untax --url https://untax.io/mcp
+```
+
+The downloadable package also includes the Codex plugin manifest, connection file, and both Untax skills.
 
 ### Cursor
 Uses `.cursor-plugin/plugin.json` and `.cursor/mcp.json` (`https://untax.io/mcp`).
@@ -45,6 +52,10 @@ Import this repository into Kiro Powers (`POWER.md` at repository root).
 npx -y skills add mooshee/untax-mcp
 clawhub install untax-research
 ```
+
+## Package and review status
+
+The release archives install the existing skills and remote connection. The included OpenAI review draft still needs a verified recording and provider checks before submission. Installing this package does not submit it to a directory or change the hosted service.
 
 ## Links
 - **Website:** https://untax.io

@@ -1,0 +1,341 @@
+{
+  "$schema": "https://developers.openai.com/plugins/schemas/chatgpt-app-submission.v1.json",
+  "app_info": {
+    "category": "BUSINESS",
+    "contact_email": "daniel@mooshworks.com",
+    "description": "Research property assessments and prepare draft comparisons in supported pilot areas. Create a free private veteran review PDF from a saved review you select, with unanswered questions shown. County records, your answers and any VA information you choose to share are identified separately. Missing building, identity, tax-year, taxable-value or filing evidence can limit the review. Drafts do not complete official forms, establish eligibility or authorize filing.",
+    "display_name": "Untax",
+    "homepage": "https://untax.io",
+    "privacy_policy_url": "https://untax.io/privacy",
+    "subtitle": "Property assessment research and draft comparisons",
+    "terms_of_service_url": "https://untax.io/terms"
+  },
+  "mcp_config": {
+    "transport": "streamable-http",
+    "url": "https://untax.io/mcp"
+  },
+  "negative_test_cases": [
+    {
+      "description": "Flight and travel booking",
+      "expected_output": "Do not invoke Untax; airline reservations are outside its domain.",
+      "user_prompt": "Book a roundtrip flight from New York to London for next week."
+    },
+    {
+      "description": "Banking and fund transfer",
+      "expected_output": "Do not invoke Untax; it cannot access private bank accounts or transfer funds.",
+      "user_prompt": "Transfer $500 from my checking account to my savings account immediately."
+    },
+    {
+      "description": "Personal calendar appointment",
+      "expected_output": "Do not invoke Untax; calendar management is outside its tools.",
+      "user_prompt": "Add a dentist appointment to my Google Calendar for 3 PM tomorrow."
+    }
+  ],
+  "positive_test_cases": [
+    {
+      "description": "Test Case 1: Property assessment research",
+      "expected_output": "Returns the selected property records with source links, dates and missing facts. Does not invent values or claim verified savings.",
+      "tools_triggered": "get_property_assessment",
+      "user_prompt": "Research the assessment for a Hamilton County, TN property. Show the sources and explain what is missing."
+    },
+    {
+      "description": "Test Case 2: Building observations and comparison evidence gaps",
+      "expected_output": "Uses the selected property and explicit answers to show available building facts, missing comparison evidence and the next relevant question.",
+      "tools_triggered": "recheck_property_opportunities",
+      "user_prompt": "Show the county building records for a Hamilton County property and explain what evidence is missing for a comparison."
+    },
+    {
+      "description": "Test Case 3: Address lookup and session scope",
+      "expected_output": "Shows matching addresses and asks the user to choose if the property is unclear. Does not treat a match as ownership authority.",
+      "tools_triggered": "suggest_addresses",
+      "user_prompt": "Suggest matching Hamilton County addresses for 100 Market St and explain available research options."
+    },
+    {
+      "description": "Test Case 4: Public VA facility lookup",
+      "expected_output": "Shows available VA facility details, official source links and source dates. Identifies any sample results and leaves missing details unknown.",
+      "tools_triggered": "find_va_facilities",
+      "user_prompt": "Find nearby VA facilities in Tennessee and show official contact and source information."
+    },
+    {
+      "description": "Test Case 5: Official VA form lookup",
+      "expected_output": "Shows matching official VA forms, their revision dates and PDF links. Does not claim that a form has been completed or submitted.",
+      "tools_triggered": "find_va_forms",
+      "user_prompt": "Find official VA forms related to disability compensation and show their revision dates."
+    }
+  ],
+  "review_instructions": {
+    "data_safety_attestation": "This MCP server does not retain user query data for model training.",
+    "test_account_credentials": "Public property research and VA office or form lookup need no sign-in. Private review cases require a dedicated authorized Untax test account and the stated permissions. VA sharing and test checkout require separate consent and available test configuration. Provide reviewer access through secure dashboard fields; do not put credentials in this package.",
+    "video_walkthrough_url": "REQUIRED BEFORE SUBMISSION: Add a reviewer-accessible recording of the Untax review cases. No recording has been verified."
+  },
+  "schema_version": 1,
+  "test_cases": [
+    {
+      "description": "Property assessment research",
+      "expected_output": "Returns the selected property records with source links, dates and missing facts. Does not invent values or claim verified savings.",
+      "user_prompt": "Research the assessment for a Hamilton County, TN property. Show the sources and explain what is missing."
+    },
+    {
+      "description": "Building records and comparison evidence",
+      "expected_output": "Uses the selected property and explicit answers to show available building facts, missing comparison evidence and the next relevant question.",
+      "user_prompt": "Show the county building records for a Hamilton County property and explain what evidence is missing for a comparison."
+    },
+    {
+      "description": "Available research and missing evidence",
+      "expected_output": "Lists the research tools available in this session and explains any missing evidence or unavailable review. Does not infer eligibility from availability.",
+      "user_prompt": "Show which property-tax research tools I can use and which reviews need more evidence."
+    },
+    {
+      "description": "Test Case 4: Coverage and data freshness verification",
+      "expected_output": "Reports the returned county coverage, source dates and limitations. Leaves unknown dates or unsupported counties unresolved.",
+      "user_prompt": "Which counties and records does Untax cover, and when were the sources updated?"
+    },
+    {
+      "description": "Test Case 5: Public record audit and verification",
+      "expected_output": "Identifies the requested records and shows their available official citations and dates. Distinguishes recorded facts from unsupported conclusions.",
+      "user_prompt": "Audit or verify specific public records and show official citations using Untax."
+    }
+  ],
+  "tools": {
+    "audit_microtransaction": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Research an explicitly selected property and identify evidence requirements for a requested property-record service. Returns source observations and service capabilities; does not establish savings, quote a payable fee, inspect payment methods, charge, generate a filing packet or submit a correction. Sandbox checkout uses separate authenticated sandbox tools. It does not change saved records."
+      }
+    },
+    "complete_tax_sandbox_order": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": false
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Checks the test payment service before completing the test order and its draft.",
+        "read_only_justification": "Verifies the selected test order and records its payment and draft-delivery result. Requires a requested test workflow; it does not authorize a live charge or filing."
+      }
+    },
+    "disconnect_va_connection": {
+      "annotations": {
+        "destructiveHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "justifications": {
+        "destructive_justification": "Revokes the selected VA connection when the user requests disconnection.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Changes the selected account connection by stopping VA sharing when requested."
+      }
+    },
+    "find_va_facilities": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Find official VA facilities in an explicit state, optionally filtered by city and facility type. Public information only. If location is missing, ask the returned question; do not infer a state or treat a VA facility as a county tax office or accredited VSO. Sandbox results are sample data. It does not change saved records."
+      }
+    },
+    "find_va_forms": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Find official VA forms by an explicit form number or search text. Ask what form or purpose is needed when query is missing. Show returned revision information and official PDF links; this does not complete or submit a claim. It does not change saved records."
+      }
+    },
+    "generate_veteran_packet": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Generate a real free private Veteran REVIEW/DRAFT PDF from an explicitly selected saved review. Requires owner:read. Missing answers remain visible review questions; no VA connection is required. Supplemental answers remain reported and are not saved to the customer review. Optional connected VA facts require additional owner:va permission and explicit use for this applicant. Returns an expiring authenticated download of exact compiled bytes, not an official application, eligibility decision, savings estimate or filing. It does not change saved records."
+      }
+    },
+    "get_appeal_lifecycle": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Read a general assessment-review checklist. Takes no property inputs and does not check a filing window, deadline, fee, eligibility or outcome. Personal procedures require official property, jurisdiction and year review. It does not change saved records."
+      }
+    },
+    "get_microtransactions_catalog": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Inspect an evidence-gated research inventory of property-tax review routes and actual session tool availability. Each route reports held/unavailable/evidence_required and not_screened applicability; no eligibility, pricing, savings, automatic refund or filing readiness is established. It does not change saved records."
+      }
+    },
+    "get_owner_review_details": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Read one explicitly selected saved property review using the same source-bound service as the website. Requires both identifiers from get_owner_workspace and a live owner:read grant. Honor source_context_current and reconfirmation_required; never silently reuse stale previous_owner_answers. Ask relevant unanswered questions without repeating current answered or skipped items. User reports remain separate from county facts; changes and sensitive evidence belong in the protected browser review. It does not change saved records."
+      }
+    },
+    "get_owner_workspace": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Uses data or settings in the connected account or this service.",
+        "read_only_justification": "Read the signed-in owner's actual saved property reviews with a revocable owner:read grant. Returns explicit property and review identifiers; no active property is assumed. Ask the user to select a review when the target is ambiguous. Does not establish ownership, benefit eligibility, savings or filing authority. It does not change saved records."
+      }
+    },
+    "get_property_assessment": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Get retained county assessment observations and source provenance for a supported address or parcel ID. Missing facts stay unavailable; commercial source area is not finished living area. Any comparison is a draft with evidence holds and does not establish personal tax savings or filing readiness. For a property audit or a request to find tax-reduction routes, review opportunity_screen before concluding. A weak or held comparable-property analysis does not rule out independent relief, record corrections or billing research. Ask the next relevant unanswered targeted_questions item one at a time; use available_questions for relevant follow-ups. Accept none, not sure or skip, and do not repeat answered or skipped questions in this conversation unless the user changes the facts. After an answer, call recheck_property_opportunities for the same selected property and county with the accumulated explicit owner_answers and skipped_question_ids. Rechecks are stateless: resend still-applicable prior answers, preserve explicit false and empty arrays, and omit unknown or skipped fields instead of sending null or inventing a negative answer. Resend stable skipped_question_ids until the user supplies an answer or asks to revisit the question. Skips suppress prompts only and leave requirements unresolved. Do not transfer property-specific answers or skips to another property. When the user is done or skips the remaining questions, summarize supported research routes and missing evidence without treating unknowns as a denial. For a fact-only lookup, answer the requested fact and offer relevant screening without requiring an unrelated intake. Owner answers do not verify eligibility, savings, authority, payment or filing readiness. It does not change saved records."
+      }
+    },
+    "get_tax_sandbox_order": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Reads the selected test order and its payment and draft-delivery status.",
+        "read_only_justification": "Read your own isolated Untax test order. Requires owner:sandbox sign-in. Payment and draft delivery statuses are separate from production eligibility or county filing. Show the returned test checkout link when payment is pending. When an order_id is known, read the same order after checkout or an uncertain failure before retrying. If starting checkout fails before an order_id is returned, retry start_tax_sandbox with the original idempotency_key; do not create a new key for the same attempt. get_tax_sandbox_order and complete_tax_sandbox_order take only order_id. Report test payment, draft generation, download availability and external delivery as separate observed states. Do not claim the draft is available until the order confirms its artifact is available; a payment or download URL alone is not proof. A sandbox receipt or simulated submission is not county filing, external email delivery or permission for live payments. It does not change saved records."
+      }
+    },
+    "get_va_connection": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Reads the dated VA verification that the user shared with this account. Saved verification is not a live provider check.",
+        "read_only_justification": "Read the dated, minimized VA verification explicitly shared with this account and assistant. Requires owner:va and live sharing permission; browser sign-in alone does not grant access. The saved account snapshot survives provider-session expiry and server restart. Disclose verified_at and freshness; saved facts are not a live provider check and may need reverification. Expired or revoked app permission stops sharing. These facts do not establish property ownership, primary residence, tax eligibility or filing authority. It does not change saved records."
+      }
+    },
+    "get_va_facility": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Read one official VA facility selected by its returned id. Returns available address, telephone and website information with source and environment. No Veteran records or eligibility determination. It does not change saved records."
+      }
+    },
+    "get_va_form": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Look up an explicit VA form number, such as 21-0966, and return available title, revision information and official PDF link. Use form_name from search results for this lookup; the separate catalog id is not a form number. If form_name is missing, ask for the form number. A form link is not a completed application, submission or proof of eligibility. It does not change saved records."
+      }
+    },
+    "recheck_property_opportunities": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Recheck possible tax-reduction routes against current retained property records and a few owner-reported categories. Returns research and next questions; answers never establish eligibility, verified evidence, savings, owner authority, payment or filing readiness. Do not send exact income, ages, identifiers, documents or a caller-supplied audit. For a property audit or a request to find tax-reduction routes, review opportunity_screen before concluding. A weak or held comparable-property analysis does not rule out independent relief, record corrections or billing research. Ask the next relevant unanswered targeted_questions item one at a time; use available_questions for relevant follow-ups. Accept none, not sure or skip, and do not repeat answered or skipped questions in this conversation unless the user changes the facts. After an answer, call recheck_property_opportunities for the same selected property and county with the accumulated explicit owner_answers and skipped_question_ids. Rechecks are stateless: resend still-applicable prior answers, preserve explicit false and empty arrays, and omit unknown or skipped fields instead of sending null or inventing a negative answer. Resend stable skipped_question_ids until the user supplies an answer or asks to revisit the question. Skips suppress prompts only and leave requirements unresolved. Do not transfer property-specific answers or skips to another property. When the user is done or skips the remaining questions, summarize supported research routes and missing evidence without treating unknowns as a denial. For a fact-only lookup, answer the requested fact and offer relevant screening without requiring an unrelated intake. Owner answers do not verify eligibility, savings, authority, payment or filing readiness. It does not change saved records."
+      }
+    },
+    "review_veteran_requirements": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Continue a property-specific requirements conversation with accumulated explicit answers and, only when requested, the connected applicant's saved VA verification. Requires owner:va. Disclose va_source.verified_at and freshness; a saved snapshot is not a current provider check. Ask returned questions one at a time; accept unknown or skip, preserve explicit false, and never reuse property-specific answers for another property. No eligibility decision, savings, generated application or filing. It does not change saved records."
+      }
+    },
+    "start_tax_sandbox": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": false
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Creates a checkout through the test payment service.",
+        "read_only_justification": "Creates a test order and checkout for a selected property when requested. Uses a stable retry key and separate test payment."
+      }
+    },
+    "start_va_connection": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": false
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Opens the browser verification and sharing process, which may use official VA sign-in.",
+        "read_only_justification": "Starts the requested browser connection so the user can choose what VA information to share. Sign-in alone does not authorize sharing."
+      }
+    },
+    "suggest_addresses": {
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "justifications": {
+        "destructive_justification": "This action does not delete records or revoke access.",
+        "open_world_justification": "Queries public Untax records spanning multiple external sources, jurisdictions, or agencies.",
+        "read_only_justification": "Search retained county-roll address candidates for partial queries and typos. If the intended property is ambiguous, show the relevant candidates and ask the user to select one before continuing with property-specific conclusions or actions. Similarity scores and is_auto_match are matching hints, not a user selection, verified owner authority or financial eligibility. It does not change saved records."
+      }
+    }
+  }
+}

@@ -5,7 +5,7 @@
     "name": "Daniel Hallman",
     "url": "https://mooshworks.com"
   },
-  "description": "Source-backed property assessment research and draft assessment comparisons. Private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
+  "description": "Research county property assessments and prepare draft comparisons from available records. Create a private veteran review PDF from a saved review you select, with unanswered questions shown. County records, your answers and any VA information you choose to share are identified separately. Missing building, identity, tax-year, taxable-value or filing evidence can limit the review. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
   "extensions": {
     "com.openai": {
       "categories": [
@@ -26,16 +26,16 @@
         "developerName": "Daniel Hallman",
         "displayName": "Untax",
         "logo": "./assets/icon.png",
-        "longDescription": "Source-backed property assessment research and draft assessment comparisons. Private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
+        "longDescription": "Research county property assessments and prepare draft comparisons from available records. Create a private veteran review PDF from a saved review you select, with unanswered questions shown. County records, your answers and any VA information you choose to share are identified separately. Missing building, identity, tax-year, taxable-value or filing evidence can limit the review. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
         "privacyPolicyURL": "https://untax.io/privacy",
-        "shortDescription": "Source-backed property asse...",
+        "shortDescription": "Property assessment research",
         "supportURL": "https://untax.io/support",
         "termsOfServiceURL": "https://untax.io/terms",
         "websiteURL": "https://untax.io"
       },
       "privacyPolicy": "https://untax.io/privacy",
       "publication": {
-        "release_notes": "Release v0.4.3: verified Streamable HTTP MCP tools and skills for Untax."
+        "release_notes": "Version 0.4.4, October 28, 2026: clearer assessment research and private-review instructions, complete listing summaries, and updated setup guidance. Existing connections and account permissions are unchanged."
       },
       "review": {
         "commerce": false,
@@ -58,31 +58,31 @@
           "positive": [
             {
               "description": "Test Case 1: Property assessment research",
-              "expected_behavior": "Grounded, accurate response using Untax tools with source links, official identifiers, and verification details.",
+              "expected_behavior": "Returns the selected property records with source links, dates and missing facts. Does not invent values or claim verified savings.",
               "prompt": "Research the assessment for a Hamilton County, TN property and show its source and evidence gaps.",
               "tools_triggered": "get_property_assessment"
             },
             {
               "description": "Test Case 2: Building observations and comparison evidence gaps",
-              "expected_behavior": "Grounded, accurate response using Untax tools with source links, official identifiers, and verification details.",
+              "expected_behavior": "Uses the selected property and explicit answers to show available building facts, missing comparison evidence and the next relevant question.",
               "prompt": "Show the retained building observations and comparison evidence gaps for a Hamilton County property.",
               "tools_triggered": "recheck_property_opportunities"
             },
             {
               "description": "Test Case 3: Address lookup and session scope",
-              "expected_behavior": "Grounded, accurate response using Untax tools with source links, official identifiers, and verification details.",
+              "expected_behavior": "Shows matching addresses and asks the user to choose if the property is unclear. Does not treat a match as ownership authority.",
               "prompt": "Suggest matching Hamilton County addresses for 100 Market St and explain available research options.",
               "tools_triggered": "suggest_addresses"
             },
             {
               "description": "Test Case 4: Public VA facility lookup",
-              "expected_behavior": "Returns authoritative, dated records from Untax without inferring unverified claims.",
+              "expected_behavior": "Shows available VA facility details, official source links and source dates. Identifies any sample results and leaves missing details unknown.",
               "prompt": "Find nearby VA facilities in Tennessee and show official contact and source information.",
               "tools_triggered": "find_va_facilities"
             },
             {
               "description": "Test Case 5: Official VA form lookup",
-              "expected_behavior": "Returns authoritative, dated records from Untax without inferring unverified claims.",
+              "expected_behavior": "Shows matching official VA forms, their revision dates and PDF links. Does not claim that a form has been completed or submitted.",
               "prompt": "Find official VA forms related to disability compensation and show their revision dates.",
               "tools_triggered": "find_va_forms"
             }
@@ -106,9 +106,9 @@
     "developerName": "Daniel Hallman",
     "displayName": "Untax",
     "logo": "./assets/icon.png",
-    "longDescription": "Source-backed property assessment research and draft assessment comparisons. Private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
+    "longDescription": "Research county property assessments and prepare draft comparisons from available records. Create a private veteran review PDF from a saved review you select, with unanswered questions shown. County records, your answers and any VA information you choose to share are identified separately. Missing building, identity, tax-year, taxable-value or filing evidence can limit the review. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).",
     "privacyPolicyURL": "https://untax.io/privacy",
-    "shortDescription": "Source-backed property asse...",
+    "shortDescription": "Property assessment research",
     "supportURL": "https://untax.io/support",
     "termsOfServiceURL": "https://untax.io/terms",
     "websiteURL": "https://untax.io"
@@ -127,5 +127,5 @@
   "name": "untax",
   "repository": "https://github.com/mooshee/untax-mcp",
   "skills": "./skills/",
-  "version": "0.4.3"
+  "version": "0.4.4"
 }
