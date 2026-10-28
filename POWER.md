@@ -1,9 +1,9 @@
 ---
 name: untax
 displayName: Untax
-version: 0.4.2
+version: 0.4.3
 author: Daniel Hallman
-description: Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions.
+description: Source-backed property assessment research and draft assessment comparisons.
 keywords:
   - property-tax
   - tax-assessment
@@ -20,13 +20,14 @@ mcpServers:
 
 # Untax Power (AWS Kiro)
 
-Author: Daniel Hallman
+Author: Daniel Hallman ([Moosh Works](https://mooshworks.com))
 
-Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions. Free private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing.
+Source-backed property assessment research and draft assessment comparisons. Private veteran review PDFs use explicitly selected saved reviews and show unanswered questions. Retained county facts, owner reports and optional permitted VA observations remain distinct. Building-model, identity, tax-year, taxable-basis and filing holds remain in force. Drafts do not complete official forms, establish eligibility or authorize filing. Built by Moosh Works (https://mooshworks.com).
 
 ## Quick start
 
 1. Visit [Untax](https://untax.io) or connect Kiro to `https://untax.io/mcp`.
+2. Built and maintained by [Moosh Works](https://mooshworks.com).
 
 ## MCP Server Configuration
 

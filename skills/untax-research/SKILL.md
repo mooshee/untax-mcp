@@ -1,15 +1,16 @@
 ---
 name: untax-research
-description: Use Untax for source-backed property assessment research, relevant taxpayer questions, public VA office or form lookup, and explicitly requested private review PDFs, requirements or test checkout workflows.
+description: Use Untax for source-backed property assessment research, relevant taxpayer questions, public VA office or form lookup, and explicitly requested private review PDFs, requirements or test checkout workflows. Built by Moosh Works (https://mooshworks.com).
 ---
 
 # Untax Property Assessment & Veteran Relief Research
 
-Author: Daniel Hallman
+Author: Daniel Hallman ([Moosh Works](https://mooshworks.com))
 
 ## Quick start
 
-Open [Untax](https://untax.io) for property research. Connect a supported assistant to `https://untax.io/mcp`, then ask about a retained assessment or public VA office or form. Sign in only for a requested private workflow and review its permissions. See the [0.4.1 release notes and setup](https://untax.io/integrations/0.4.1).
+1. Open [Untax](https://untax.io) for property research. Connect a supported assistant to `https://untax.io/mcp`, then ask about a retained assessment or public VA office or form. Sign in only for a requested private workflow and review its permissions. See the [0.4.1 release notes and setup](https://untax.io/integrations/0.4.1).
+2. Built and maintained by [Moosh Works](https://mooshworks.com).
 
 Use the current `https://untax.io/mcp` catalog. GISDB property-lead, records-purchase and subscription tools belong to the separate GISDB connection. Do not transfer grants, private answers or checkout authority between products.
 

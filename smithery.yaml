@@ -1,7 +1,7 @@
 name: io.github.mooshee/untax
 displayName: Untax
-description: Source-backed property assessment research and draft assessment comparisons for supported pilot jurisdictions.
-version: 0.4.2
+description: Source-backed property assessment research and draft assessment comparisons.
+version: 0.4.3
 homepage: https://untax.io
 repository: https://github.com/mooshee/untax-mcp
 license: MIT

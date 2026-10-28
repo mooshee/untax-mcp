@@ -52,3 +52,8 @@ clawhub install untax-research
 - **Privacy Policy:** https://untax.io/privacy
 - **Terms of Service:** https://untax.io/terms
 - **Support:** https://untax.io/support
+
+
+---
+
+Built and maintained by **[Moosh Works](https://mooshworks.com)**.

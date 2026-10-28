@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "description": "Source-backed property assessment research and draft assessment comparisons for supported pilot j...",
+  "description": "Source-backed property assessment research and draft assessment comparisons. (mooshworks.com)",
   "name": "io.github.mooshee/untax",
   "remotes": [
     {
@@ -13,6 +13,6 @@
     "url": "https://github.com/mooshee/untax-mcp"
   },
   "title": "Untax",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "websiteUrl": "https://untax.io"
 }
